@@ -1,0 +1,58 @@
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow-lg p-4">
+        <h2 class="text-center mb-4 text-primary">Generate Invoice</h2>
+
+        <form method="post" class="p-3">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <div class="text-center">
+                <button type="submit" class="btn btn-lg btn-primary">
+                    <i class="fas fa-file-invoice"></i> Generate Invoice
+                </button>
+            </div>
+        </form>
+
+        <div class="text-center mt-4">
+            <a href="{% url 'billing_dashboard' %}" class="btn btn-lg btn-secondary">
+                <i class="fas fa-arrow-left"></i> Back to Billing Dashboard
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap CDN for styling -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Add custom styling -->
+<style>
+    .card {
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        font-weight: bold;
+    }
+
+    .btn-primary, .btn-secondary {
+        transition: 0.3s;
+    }
+
+    .btn-primary:hover, .btn-secondary:hover {
+        opacity: 0.8;
+    }
+
+    form {
+        max-width: 600px;
+        margin: auto;
+    }
+</style>
+
+{% endblock %}

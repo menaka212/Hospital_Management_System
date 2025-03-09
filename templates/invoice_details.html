@@ -1,0 +1,147 @@
+{% load static %}
+{% block content %}
+<style>
+    /* Centering the invoice card */
+    .invoice-container {
+        max-width: 700px;
+        margin: 50px auto;
+        background: #ffffff;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        padding: 20px;
+    }
+
+    /* Invoice header styling */
+    .invoice-header {
+        text-align: center;
+        font-size: 22px;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 10px;
+    }
+
+    /* Table styling */
+    .invoice-table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+
+    .invoice-table th, .invoice-table td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .invoice-table th {
+        background: #007bff;
+        color: white;
+        text-align: left;
+    }
+
+    .invoice-table tr:nth-child(even) {
+        background-color: #f8f9fa;
+    }
+
+    .invoice-table td {
+        color: #555;
+    }
+
+    /* Status styling */
+    .status-badge {
+        padding: 5px 10px;
+        border-radius: 5px;
+        font-weight: bold;
+        display: inline-block;
+    }
+
+    .status-paid {
+        background-color: #28a745;
+        color: white;
+    }
+
+    .status-pending {
+        background-color: #dc3545;
+        color: white;
+    }
+
+    /* Button styling */
+    .back-button {
+        display: block;
+        width: 100%;
+        text-align: center;
+        background: #007bff;
+        color: white;
+        padding: 10px;
+        text-decoration: none;
+        font-size: 16px;
+        font-weight: bold;
+        border-radius: 5px;
+        transition: 0.3s;
+    }
+
+    .back-button:hover {
+        background: #0056b3;
+    }
+</style>
+
+<div class="container">
+    <div class="invoice-container">
+        <div class="invoice-header">Invoice Details</div>
+
+        <table class="invoice-table">
+            <tr>
+                <th>Invoice ID</th>
+                <td>{{ invoice.id }}</td>
+            </tr>
+            <tr>
+                <th>Patient Name</th>
+                <td>{{ invoice.patient.name }}</td>
+            </tr>
+            <tr>
+                <th>Gender</th>
+                <td>{{ invoice.patient.gender }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ invoice.patient.age }}</td>
+            </tr>
+            <tr>
+                <th>Email</th>
+                <td>{{ invoice.patient.email }}</td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>{{ invoice.patient.address }}</td>
+            </tr>
+            <tr>
+                <th>Diagnosis</th>
+                <td>{{ invoice.diagnosis }}</td>
+            </tr>
+            <tr>
+                <th>ICD-10 Code</th>
+                <td>{{ invoice.icd10_code }}</td>
+            </tr>
+            <tr>
+                <th>CPT Code</th>
+                <td>{{ invoice.cpt_code }}</td>
+            </tr>
+            <tr>
+                <th>Amount ($)</th>
+                <td>${{ invoice.amount }}</td>
+            </tr>
+            <tr>
+                <th>Status</th>
+                <td>
+                    <span class="status-badge {% if invoice.status == 'Paid' %}status-paid{% else %}status-pending{% endif %}">
+                        {{ invoice.status }}
+                    </span>
+                </td>
+            </tr>
+        </table>
+
+        <a href="{% url 'billing_dashboard' %}" class="back-button">Back to Billing Dashboard</a>
+    </div>
+</div>
+
+{% endblock %}
